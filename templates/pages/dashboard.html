@@ -1,4 +1,4 @@
-{% include 'layouts/base.html' %}
+{% extends 'layouts/base.html' %}
 
 {% block content %}
 
@@ -10,7 +10,7 @@
             <div class="items">
                 <form action="{{ url_for('dashboard') }}" method="post" class="form">
                     <div class="container flex f-row g-2">
-                        <input type="text" name="search" placeholder="Search File" class="input">
+                        <input type="text" name="search" placeholder="Search File" {% if filter %}value="{{ filter }}"{% endif %} class="input">
                         <button type="submit" class="button"><i class="fas fa-search t-white"></i></button>
                     </div>
                 </form>
@@ -29,8 +29,9 @@
             <div class="box overflow-auto mb-4">
                 <h5>New Files</h5>
                 <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file" id="file" multiple required class="button light none">
-                    <label for="file" class="button light"><i class="fas fa-upload t-grey-darker mr-2"></i>Choose file</label>
+                    <input type="file" name="file" id="file" multiple required class="none">
+                    <label for="file" class="button light">
+                        <i class="fas fa-upload t-grey-darker mr-2"></i><span id="filechosen" class="fw-medium">Choose file</span></label>
                     <button type="submit" class="button">Upload</button>
                 </form>
             </div>
@@ -38,7 +39,7 @@
             {% if filter %}
                 <div class="box border-dark mb-4">
                     <div class="container flex f-row f-justify-space-between f-align-center f-wrap">
-                        <p><strong>Filter: </strong> Search Results for <strong>{{ filter }}</strong></p>
+                        <p><strong>Results:</strong> {{ files|length }} Files</p>
                         <a href="{{ url_for('dashboard') }}" class="button danger">Remove Filter</a>
                     </div>
                 </div>
