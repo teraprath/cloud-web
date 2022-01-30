@@ -1,0 +1,83 @@
+{% include 'layouts/base.html' %}
+
+{% block content %}
+
+    <header>
+        <nav class="navbar ph-20">
+            <div class="logo">
+                <a href="#" class="fw-bold">Cloud</a>
+            </div>
+            <div class="items">
+                <form action="{{ url_for('dashboard') }}" method="post" class="form">
+                    <div class="container flex f-row g-2">
+                        <input type="text" name="search" placeholder="Search File" class="input">
+                        <button type="submit" class="button"><i class="fas fa-search t-white"></i></button>
+                    </div>
+                </form>
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="section full bg-light ph-20">
+
+        <div class="container">
+
+            <div class="box overflow-auto mb-4">
+                <h5>New Files</h5>
+                <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" id="file" multiple required class="button light none">
+                    <label for="file" class="button light"><i class="fas fa-upload t-grey-darker mr-2"></i>Choose file</label>
+                    <button type="submit" class="button">Upload</button>
+                </form>
+            </div>
+
+            {% if filter %}
+                <div class="box border-dark mb-4">
+                    <div class="container flex f-row f-justify-space-between f-align-center f-wrap">
+                        <p><strong>Filter: </strong> Search Results for <strong>{{ filter }}</strong></p>
+                        <a href="{{ url_for('dashboard') }}" class="button danger">Remove Filter</a>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="box overflow-auto">
+                <h5>Storage</h5>
+                {% if files %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>Filename</td>
+                                <td>Size</td>
+                                <td>Date</td>
+                                <td>Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for file in files %}
+                                <tr>
+                                    <td><a href="{{ url_for('static', filename='uploads/' + file[0]) }}" target="_blank" class="t-decoration-none t-grey-darker"><i class="fas fa-file mr-2"></i>{{ file[0] }}</a></td>
+                                    <td>{{ file[1] }}</td>
+                                    <td>{{ file[2] }}</td>
+                                    <td>
+                                        <a class="button danger" href="{{ url_for('delete', filename=file[0]) }}"><i class="fas fa-trash t-white"></i></a>
+                                        <a class="button light" href="{{ url_for('download', filename=file[0]) }}"><i class="fas fa-download"></i></a>
+                                        <!-- <a class="button link" href="{{ url_for('static', filename='uploads/' + file[0]) }}" target="_blank"><i class="fas fa-eye t-white"></i></a> -->
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No Files found.</p>
+                {% endif %}
+            </div>
+
+        </div>
+
+    </section>
+    
+{% endblock %}

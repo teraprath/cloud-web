@@ -1,0 +1,32 @@
+{% include 'layouts/base.html' %}
+
+{% block content %}
+
+    <section class="section full bg-light flex f-align-center f-justify-center">
+
+        <div class="container flex f-column g-4">
+            {% if error %}
+                <div class="box border-danger">
+                    <p>{{ error }}</p>
+                </div>
+            {% endif %}
+            <div class="box">
+                <h4 class="t-align-center">Login</h4>
+                <form action="{{ url_for('login') }}" method="post" class="form">
+                    <div class="field">
+                        <div class="control">
+                            <input type="password" name="password" placeholder="Password" class="input">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button w-full">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </section>
+    
+{% endblock %}
