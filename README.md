@@ -1,5 +1,5 @@
 # Personal Cloud
-Simple Cloud Webpanel with Python (Flask) and SQLite3 using my CSS Framework [SimpleUI](https://github.com/teraprath/simple-ui)
+Simple Cloud Webpanel with Python (Flask) and SQLite3 using my CSS Framework [SimpleUI](https://github.com/teraprath/simple-ui) (BETA)
 
 ![](https://i.imgur.com/8GKGboO.png)
 
