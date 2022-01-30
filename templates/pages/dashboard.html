@@ -5,7 +5,7 @@
     <header>
         <nav class="navbar ph-20">
             <div class="logo">
-                <a href="#" class="fw-bold">Cloud</a>
+                <a class="fw-bold">Cloud</a>
             </div>
             <div class="items">
                 <form action="{{ url_for('dashboard') }}" method="post" class="form">
@@ -15,7 +15,7 @@
                     </div>
                 </form>
                 <ul>
-                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="https://github.com/teraprath/cloud-web" target="_blank">GitHub</a></li>
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 </ul>
             </div>
@@ -66,7 +66,6 @@
                                     <td>
                                         <a class="button danger" href="{{ url_for('delete', filename=file[0]) }}"><i class="fas fa-trash t-white"></i></a>
                                         <a class="button light" href="{{ url_for('download', filename=file[0]) }}"><i class="fas fa-download"></i></a>
-                                        <!-- <a class="button link" href="{{ url_for('static', filename='uploads/' + file[0]) }}" target="_blank"><i class="fas fa-eye t-white"></i></a> -->
                                     </td>
                                 </tr>
                             {% endfor %}
